@@ -19,5 +19,4 @@
 ```
 python format_price.py -p 3245.000000
 python tests.py
-
 ```
