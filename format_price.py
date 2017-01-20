@@ -26,19 +26,19 @@ def split_float_number(price):
     return whole.replace(',', ' '), fraction
 
 
-def format_price(price):
+def format_price(price, default_error="?"):
     if check_letters(price):
-        return 'Ошибка - цена содержит буквы', None
+        return default_error, None
     elif check_negative_numbers(price):
-        return 'Ошибка - цена отрицательная', None
+        return default_error, None
     elif check_special_chars(price):
-        return 'Ошибка - цена содержит спец. символы', None
+        return default_error, None
     else:
         price = price.replace(',', '.')
         if price.count('.') == 1:
             return split_float_number(float(price))
         else:
-            return 'Ошибка - неверная цена', None
+            return default_error, None
 
 
 def main():
