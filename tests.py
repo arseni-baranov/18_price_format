@@ -1,16 +1,19 @@
 import unittest
 import format_price
 
+DEFAULT_ERROR = '?'
+
 
 class PriceFormatTestCase(unittest.TestCase):
+
     def test_negative_price(self):
         whole, fractional = format_price.format_price('-123.00545')
-        self.assertEqual(whole, 'Ошибка - цена отрицательная')
+        self.assertEqual(whole, DEFAULT_ERROR)
         self.assertIsNone(fractional)
 
     def test_alpha_string_price(self):
         whole, fractional = format_price.format_price('123.0f564')
-        self.assertEqual(whole, 'Ошибка - цена содержит буквы')
+        self.assertEqual(whole, DEFAULT_ERROR)
         self.assertIsNone(fractional)
 
     def test_replace_comma(self):
@@ -20,7 +23,7 @@ class PriceFormatTestCase(unittest.TestCase):
 
     def test_incorrect_price(self):
         whole, fractional = format_price.format_price('123,123,00654')
-        self.assertEqual(whole, 'Ошибка - неверная цена')
+        self.assertEqual(whole, DEFAULT_ERROR)
         self.assertIsNone(fractional)
 
     def test_correct_price(self):
